@@ -122,8 +122,11 @@ if [ -n "${PRUNE:-}" ]; then
     if [ -z "${KEEP_MONTHLY:-}" ]; then
         KEEP_MONTHLY=6
     fi
-
-    borg prune -v --stats --show-rc $PRUNE_PREFIX --keep-daily=$KEEP_DAILY --keep-weekly=$KEEP_WEEKLY --keep-monthly=$KEEP_MONTHLY
+    if [ -z "${KEEP_LAST:-}" ]; then
+        KEEP_LAST=10
+    fi
+    
+    borg prune -v --stats --show-rc $PRUNE_PREFIX --keep-daily=$KEEP_DAILY --keep-weekly=$KEEP_WEEKLY --keep-monthly=$KEEP_MONTHLY --keep-last=$KEEP_LAST
 fi
 
 if [ "${BORG_SKIP_CHECK:-}" != '1' ] && [ "${BORG_SKIP_CHECK:-}" != "true" ]; then
