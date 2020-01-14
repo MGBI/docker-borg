@@ -150,6 +150,8 @@ Description of all accepted environment variables follows.
 
 **KEEP_MONTHLY** - keep specified number of monthly backups. Defaults to 6
 
+**KEEP_LAST** - keep specified number of last backups. Defaults to 10
+
 ### SSHFS
 
 **SSHFS** - sshfs destination in form of `user@host:/path`. When using sshfs, container needs special permissions: `--cap-add SYS_ADMIN --device /dev/fuse` and if using SELinux: `--security-opt label:disable` or apparmor: `--security-opt apparmor:unconfined`
