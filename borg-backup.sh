@@ -105,7 +105,7 @@ else
     EXCLUDE_BORG=''
 fi
 
-borg create -v --stats --show-rc $COMPRESSION $EXCLUDE_BORG ::"$ARCHIVE" $BACKUP_DIRS
+borg create -v --stats --show-rc $COMPRESSION "$EXCLUDE_BORG" ::"$ARCHIVE" $BACKUP_DIRS
 
 if [ -n "${PRUNE:-}" ]; then
     if [ -n "${PRUNE_PREFIX:-}" ]; then
