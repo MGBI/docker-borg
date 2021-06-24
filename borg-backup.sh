@@ -97,7 +97,7 @@ if [ -n "${EXCLUDE:-}" ]; then
 
     EXCLUDE_BORG=''
     for i in $EXCLUDE; do
-        EXCLUDE_BORG="${EXCLUDE_BORG} --exclude ${i}"
+        EXCLUDE_BORG="${EXCLUDE_BORG} --exclude \"${i}\""
     done
 
     IFS=$OLD_IFS
