@@ -1,9 +1,5 @@
-FROM fedora:31
-
-RUN dnf -y --setopt=install_weak_deps=False install \
-        borgbackup \
-        fuse-sshfs \
-    && dnf clean all
+FROM alpine
+RUN apk --no-cache add borgbackup bash
 
 ENV LANG en_US.UTF-8
 
