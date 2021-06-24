@@ -1,6 +1,12 @@
+**Forked from:**
+https://github.com/pschiffe/docker-borg
+
 # Borg Docker Image
 
-[![](https://images.microbadger.com/badges/version/pschiffe/borg.svg)](https://microbadger.com/images/pschiffe/borg "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/pschiffe/borg.svg)](https://microbadger.com/images/pschiffe/borg "Get your own image badge on microbadger.com") [![Docker Pulls](https://img.shields.io/docker/pulls/pschiffe/borg.svg)](https://hub.docker.com/r/pschiffe/borg/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mgbi/borg.svg?maxAge=8600)][hub]
+[![License](https://img.shields.io/github/license/mgbi/docker-borg.svg?maxAge=8600)]()
+
+[hub]: https://hub.docker.com/r/mgbi/docker-borg/
 
 Docker image with [BorgBackup](https://borgbackup.readthedocs.io/en/stable/) client utility and sshfs support. Borg is a deduplicating backup program supporting compresion and encryption. It's very efficient and doesn't need regular full backups while still supporting data pruning.
 
@@ -8,7 +14,7 @@ Docker image with [BorgBackup](https://borgbackup.readthedocs.io/en/stable/) cli
 
 First, pull the image to keep it up to date. Then create and run the borg backup container. In this quick start, the `/etc` and `/home` directories from the host are bind mounted to the container as read only. These are the directories which will be backed up. The backed up data will be stored in the `borg-repo` Docker volume, and the data will be protected with the `my-secret-pw` password. If the host is using SELinux, the `--security-opt label:disable` flag must be used, because we don't want to relabel the `/etc` and `/home` directories while we want the container to have access to them. After the backup is done, data will be pruned according to the default policy and checked for errors. Borg is running in a verbose mode within the container, so the detailed output from backup will be printed. At the end, the container is deleted. This is done by separate `docker rm` command, because the `--rm` option to the `docker run` would remove also the Docker volumes, and we don't want that. Deleting the container and pulling the image from registry every time keeps the container fresh every time the backup is run.
 ```
-docker pull pschiffe/borg
+docker pull mgbi/borg
 docker run \
   -e BORG_REPO=/borg/repo \
   -e BORG_PASSPHRASE=my-secret-pw \
@@ -23,7 +29,7 @@ docker run \
   -v /home:/borg/data/home:ro \
   --security-opt label:disable \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 docker rm borg-backup
 ```
 
@@ -43,7 +49,7 @@ docker run \
   -v mariadb-data:/borg/data/mariadb:ro \
   -v worpdress-data:/borg/data/wordpress:ro \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 ```
 
 Using sshfs (in case when the Borg is not installed on the remote location):
@@ -61,7 +67,7 @@ docker run \
   -v worpdress-data:/borg/data/wordpress:ro \
   --cap-add SYS_ADMIN --device /dev/fuse --security-opt label:disable \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 ```
 
 Using sshfs with ssh key authentification:
@@ -81,7 +87,7 @@ docker run \
   -v worpdress-data:/borg/data/wordpress:ro \
   --cap-add SYS_ADMIN --device /dev/fuse --security-opt label:disable \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 ```
 
 Restoring files from specific day to folder on host:
@@ -97,7 +103,7 @@ docker run \
   -v /opt/restore:/borg/restore \
   --security-opt label:disable \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 ```
 
 Running custom borg command:
@@ -109,7 +115,7 @@ docker run \
   -v borg-config:/root/.config/borg \
   -v borg-cache:/root/.cache/borg \
   --name borg-backup \
-  pschiffe/borg
+  mgbi/borg
 ```
 
 ## Environment variables

@@ -1,8 +1,8 @@
 # Build
 
-docker build -t borg .
+docker build -t mgbi/borg .
 
-# Backup 
+# Backup
 docker run --rm \
   -e BORG_PASSPHRASE=my-secret-pw \
   -e BORG_REPO=/borg/repo \
@@ -15,8 +15,8 @@ docker run --rm \
   -v repo:/borg/repo \
   -v data:/borg/data:ro \
   --security-opt label:disable \
-  borg
- 
+  mgbi/borg
+
 # List (custom command)
 
 docker run --rm \
@@ -27,7 +27,7 @@ docker run --rm \
   -v config:/root/.config/borg \
   -v cache:/root/.cache/borg \
   --security-opt label:disable \
-  borg
+  mgbi/borg
 
 # Restore
 
@@ -41,4 +41,4 @@ docker run --rm \
   -v cache:/root/.cache/borg \
   -v restore:/borg/restore \
   --security-opt label:disable \
-  borg
+  mgbi/borg
