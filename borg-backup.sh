@@ -56,7 +56,7 @@ else
     INIT_ENCRYPTION='--encryption=repokey'
 fi
 
-DEFAULT_ARCHIVE="${HOSTNAME}_$(date +%Y-%m-%d)"
+DEFAULT_ARCHIVE="${HOSTNAME}_$(date +%Y-%m-%d-%H:%M)"
 ARCHIVE="${ARCHIVE:-$DEFAULT_ARCHIVE}"
 
 if [ -n "${EXTRACT_TO:-}" ]; then
