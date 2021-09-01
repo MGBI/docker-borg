@@ -56,7 +56,7 @@ else
     INIT_ENCRYPTION='--encryption=repokey'
 fi
 
-DEFAULT_ARCHIVE="${HOSTNAME}_$(date +%Y-%m-%d-%H:%M)"
+DEFAULT_ARCHIVE="${HOSTNAME}_$(date +%Y-%m-%d_%H-%M)"
 ARCHIVE="${ARCHIVE:-$DEFAULT_ARCHIVE}"
 
 if [ -n "${EXTRACT_TO:-}" ]; then
@@ -125,7 +125,7 @@ if [ -n "${PRUNE:-}" ]; then
     if [ -z "${KEEP_LAST:-}" ]; then
         KEEP_LAST=10
     fi
-    
+
     borg prune -v --stats --show-rc $PRUNE_PREFIX --keep-daily=$KEEP_DAILY --keep-weekly=$KEEP_WEEKLY --keep-monthly=$KEEP_MONTHLY --keep-last=$KEEP_LAST
 fi
 
