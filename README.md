@@ -127,6 +127,8 @@ Description of all accepted environment variables follows.
 
 **BORG_REPO** - repository location
 
+**BORG_REMOTE_PATH** - remote path to the Borg executable (if installed). Defaults to `borg`.
+
 **ARCHIVE** - archive parameter for Borg repository. If empty, defaults to `"${HOSTNAME}_$(date +%Y-%m-%d)"`. For more info see [Borg documentation](https://borgbackup.readthedocs.io/en/stable/usage.html)
 
 **BACKUP_DIRS** - directories to back up

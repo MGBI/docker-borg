@@ -61,6 +61,8 @@ else
     INIT_ENCRYPTION='--encryption=repokey'
 fi
 
+INIT_REMOTE_PATH='--remote-path=${BORG_REMOTE_PATH:-borg}'
+
 DEFAULT_ARCHIVE="${HOSTNAME}_$(date +%Y-%m-%d_%H-%M)"
 ARCHIVE="${ARCHIVE:-$DEFAULT_ARCHIVE}"
 
@@ -87,7 +89,7 @@ if [ "${BORG_REPO:0:1}" == '/' ] && [ ! "$(ls -A $BORG_REPO)" ]; then
 fi
 
 if [ -n "${INIT_REPO:-}" ]; then
-    borg init -v --show-rc $INIT_ENCRYPTION
+    borg init -v --show-rc $INIT_ENCRYPTION $INIT_REMOTE_PATH
 fi
 
 if [ -n "${COMPRESSION:-}" ]; then
