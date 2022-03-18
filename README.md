@@ -35,12 +35,13 @@ docker rm borg-backup
 
 ## More examples
 
-Backup docker volumes to remote location (Borg must be running in server mode in that remote location):
+Backup docker volumes to remote location (Borg must be running in server mode in that remote location)
+with BORG_PASSPHRASE variable read from a local file:
 ```
 docker run \
   -e BORG_REPO='user@hostname:/path/to/repo' \
   -e ARCHIVE=wordpress-$(date +%Y-%m-%d) \
-  -e BORG_PASSPHRASE=my-secret-pw \
+  -e BORG_PASSPHRASE_FILE=/run/secrets/my-secret-pw-file \
   -e BACKUP_DIRS=/borg/data \
   -e COMPRESSION=lz4 \
   -e PRUNE=1 \
@@ -143,6 +144,8 @@ Description of all accepted environment variables follows.
 ### Encryption
 
 **BORG_PASSPHRASE** - `repokey` mode password to encrypt the backed up data. Defaults to none. Only the `repokey` mode encryption is supported by this Docker image. [More info](https://borgbackup.readthedocs.io/en/stable/usage.html#borg-init)
+
+**BORG_PASSPHRASE_FILE** - path to file with `BORG_PASSPHRASE`. Use it instead of passing the variable.
 
 ### Extracting (restoring) files
 

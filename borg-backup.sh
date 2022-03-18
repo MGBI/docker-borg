@@ -18,6 +18,11 @@ function quit {
     exit 0
 }
 
+if [ -n "${BORG_PASSPHRASE_FILE}" ]; then
+  BORG_PASSPHRASE_FILE_VALUE=`cat ${BORG_PASSPHRASE_FILE}`
+fi
+BORG_PASSPHRASE=${BORG_PASSPHRASE:-$BORG_PASSPHRASE_FILE_VALUE}
+
 if [ -n "${SSHFS:-}" ]; then
     if [ -n "${SSHFS_IDENTITY_FILE:-}" ]; then
         if [ ! -f "$SSHFS_IDENTITY_FILE" ] && [ -n "${SSHFS_GEN_IDENTITY_FILE:-}" ]; then
@@ -51,7 +56,7 @@ export BORG_REPO
 
 if [ -z "${BORG_PASSPHRASE:-}" ]; then
     INIT_ENCRYPTION='--encryption=none'
-    echoerr 'Not using encryption. If you want to encrypt your files, set $BORG_PASSPHRASE variable.'
+    echoerr 'Not using encryption. If you want to encrypt your files, set $BORG_PASSPHRASE or $BORG_PASSPHRASE_FILE variable.'
 else
     INIT_ENCRYPTION='--encryption=repokey'
 fi
